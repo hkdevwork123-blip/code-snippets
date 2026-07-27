@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400&family=Oxygen:wght@300&family=Prompt:wght@300;500&display=swap");
+
+:root {
+  --vp-c-brand: #4d7ea8;
+}
+body {
+  padding: 1rem;
+}
+h1 {
+  font-size: 4rem;
+  line-height: 1;
+  font-family: "Prompt", sans-serif;
+  font-weight: 500;
+}
+.heading {
+  margin-bottom: 3rem;
+}
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+}
+.container-layout {
+  display: grid;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: var(--vp-c-brand);
+  color: white;
+  min-height: 50vh;
+  /* t-r-b-l */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: 1000px;
+  margin: 3rem auto;
+  justify-content: center;
+  align-items: center;
+}
+.grid-item {
+  text-align: center;
+}
+svg {
+  margin: auto;
+  margin-top: 3rem;
+}
+.container-layout:hover {
+  background-color: white;
+  transition: background 0.1s linear;
+  color: var(--vp-c-brand);
+}
+h3 {
+  margin-top: 1rem;
+  color: var(--vp-c-brand);
+}
