@@ -207,20 +207,6 @@ kubectl exec -it <pod-name> -n <namespace> -- node -e "fetch('https://domain.com
 
 ### Other Useful Commands
 
-Some other random commands, I've seen from Gabe that I NEED TO FIGURE OUT!
-
-```bash
-aws-vault exec playground
-aws eks --region us-east-1 update-kubeconfig --name avst-kubera-playground
-aws sts get-caller-identity
-```
-
-```bash
-kubectl get pods -n orbit-backend
-kubectl describe pod orbit-backend-5fd78dd75c-qwj67 -n orbit-backend
-kubectl exec -n orbit-backend -it orbit-backend-798d757b77-dhh6m -c kubera-application-chart -- /bin/sh
-```
-
 1. **AWS Authentication and Cluster Configuration**:
 
    - `aws-vault exec p-sandbox`: Executes commands with AWS credentials from the specified profile
@@ -240,5 +226,3 @@ aws-vault exec p-sandbox -- kubectl get all -n orbit-web-service-feat-orb-158-au
      - `-n`: Specifies the namespace
      - `-it`: Enables interactive terminal
      - `-c`: Specifies which container to execute in (for multi-container pods)
-
-These commands are essential for debugging, monitoring, and managing applications running in Kubernetes clusters.
