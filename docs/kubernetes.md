@@ -84,15 +84,15 @@ Kubectl is a command line tool for communicating with a Kubernetes cluster's con
 brew install kubernetes-cli
 ```
 
-You will need access to the AWS account and update your AWS config file to include the below. e.g. platform-data-tool-sbx (#231442630705)
+You will need access to the AWS account and update your AWS config file to include the below.
 
 ```
-[profile p-data-tool-sbx]
-sso_start_url = https://adaptavist.awsapps.com/start
+[profile <PROFILE_NAME>]
+sso_start_url = https://<YOUR_SSO_PORTAL>.awsapps.com/start
 sso_region = us-east-1
 region = us-east-1
-sso_account_id = 231442630705
-sso_role_name = AWSAvstAdmin
+sso_account_id = <ACCOUNT_ID>
+sso_role_name = <SSO_ROLE_NAME>
 output = json
 ```
 
@@ -115,8 +115,8 @@ The `aws eks update-kubeconfig` command updates your kubeconfig file with the ne
 
 ```bash
 aws eks list-clusters --region=us-east-1 # List the eks cluster available
-aws eks update-kubeconfig --name avst-data-tool-sbx-plat
-kubectl config use-context arn:aws:eks:us-east-1:231442630705:cluster/avst-data-tool-sbx-plat
+aws eks update-kubeconfig --name <CLUSTER_NAME>
+kubectl config use-context arn:aws:eks:us-east-1:<ACCOUNT_ID>:cluster/<CLUSTER_NAME>
 ```
 
 View config to check it has been set correctly
