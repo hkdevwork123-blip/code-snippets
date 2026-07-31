@@ -59,3 +59,120 @@ Create a base64 encoded basic auth token
 ```bash
 echo -n "username:password" | base64
 ```
+
+### Finding Files
+
+Find files by name (case-insensitive) anywhere under the current directory
+
+```bash
+find . -type f -iname "*.log"
+```
+
+Find files larger than 100MB
+
+```bash
+find . -type f -size +100M
+```
+
+Find files modified in the last 24 hours
+
+```bash
+find . -type f -mtime -1
+```
+
+Search inside files for a string and list the matching filenames
+
+```bash
+# ripgrep is fast and respects .gitignore
+rg -l "TODO" .
+
+# grep fallback
+grep -rl "TODO" .
+```
+
+### Killing Processes
+
+Find the process listening on a given port
+
+```bash
+lsof -i :3000
+```
+
+Kill whatever is holding a port (macOS / Linux)
+
+```bash
+kill -9 $(lsof -ti :3000)
+```
+
+Find a process by name and kill it
+
+```bash
+pgrep -fl node        # list matching processes with their command line
+pkill -f "vite"       # kill every process whose command line matches "vite"
+```
+
+Gracefully terminate, then force-kill if it survives
+
+```bash
+kill 12345            # SIGTERM (graceful)
+kill -9 12345         # SIGKILL (force)
+```
+
+### Network Checks
+
+List listening TCP ports. On Linux, `netstat -tulpn` also shows the owning process. macOS `netstat` has no `-p` flag, so it can only list the ports, not which process holds them - use `lsof` when you need the process too.
+
+```bash
+# Linux: ports + owning process
+netstat -tulpn
+
+# macOS: ports only (no process)
+netstat -an | grep LISTEN
+
+# macOS: ports + owning process
+lsof -nP -iTCP -sTCP:LISTEN
+```
+
+Check whether a specific port is open on a remote host. `-z` is zero-I/O (just probe, send nothing), `-v` is verbose. A `succeeded` line means the remote host is accepting TCP connections on that port (here, its HTTPS server is up)
+
+```bash
+nc -vz example.com 443
+# Connection to example.com port 443 [tcp/https] succeeded!
+```
+
+Show active connections and listening sockets. `ss` (from Linux's `iproute2`) is the modern replacement for `netstat`, but it is **Linux-only** and is not available on macOS.
+
+```bash
+# Linux
+ss -tulpn
+
+# macOS: use lsof (shows the owning process, like ss does)
+lsof -nP -iTCP -sTCP:LISTEN
+```
+
+Quick DNS lookup and reachability check
+
+```bash
+dig +short example.com
+ping -c 4 example.com
+```
+
+### Base64 Encoding
+
+Encode a password or API key (the -n avoids adding a trailing newline)
+
+```bash
+echo -n "s3cr3t-api-key" | base64
+```
+
+Decode a base64 string back to plain text
+
+```bash
+echo "czNjcjN0LWFwaS1rZXk=" | base64 --decode
+```
+
+Encode the contents of a file (e.g. a cert or key) to base64
+
+```bash
+base64 -i ./api-key.txt
+```
