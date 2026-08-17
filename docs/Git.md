@@ -307,6 +307,109 @@ git branch --show-current # Show the current branch
 git push -f origin feat/ORB-338-xero-client # Force push the branch
 ```
 
+### Git Worktrees
+
+`git worktree` lets you use multiple branches from the same repo in separate folders. It's useful for parallel feature work, separate IDE windows, or keeping an agent running on one branch while you work on another.
+
+#### Create a worktree
+
+From inside your repo:
+
+```bash
+git fetch origin
+git worktree add ../orbit-web-service-feature-b -b feature-b origin/main
+```
+
+This:
+
+- creates a new folder next to your repo
+- creates a new branch
+- checks it out in that folder
+
+#### Use it
+
+Move into the new worktree:
+
+```bash
+cd ../orbit-web-service-feature-b
+git branch --show-current
+```
+
+#### Switch worktrees
+
+A worktree is just another folder:
+
+```bash
+cd /Users/hectorkurtyanek/Desktop/repos/orbit-web-service
+cd /Users/hectorkurtyanek/Desktop/repos/orbit-web-service-feature-b
+```
+
+List all worktrees:
+
+```bash
+git worktree list
+```
+
+#### Switch or create branches in a worktree
+
+```bash
+git switch branch-name
+git switch -c new-branch-name
+```
+
+A branch can only be checked out in one worktree at a time.
+
+#### Rename the current branch
+
+```bash
+git branch -m better-branch-name
+```
+
+#### Push your branch
+
+```bash
+git add .
+git commit -m "Add feature"
+git push -u origin better-branch-name
+```
+
+Then open your MR/PR as normal.
+
+#### After merge
+
+**Remove the worktree** - best if it was just for one feature:
+
+```bash
+git worktree remove ../orbit-web-service-feature-b
+git branch -d better-branch-name
+```
+
+**Reuse the worktree** - update it and start another branch:
+
+```bash
+cd ../orbit-web-service-feature-b
+git fetch origin
+git switch main
+git pull
+git switch -c next-feature
+```
+
+#### Useful commands
+
+```bash
+git worktree list
+git branch --show-current
+git status
+pwd
+```
+
+> **Tip:** before committing or pushing, check where you are - this avoids making changes in the wrong worktree or branch:
+>
+> ```bash
+> pwd
+> git branch --show-current
+> ```
+
 ### Viewing History
 
 ```bash
