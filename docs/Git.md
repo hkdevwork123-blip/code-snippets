@@ -268,6 +268,7 @@ git commit -m "message"     # Commit staged changes
 git push                   # Push commits to remote repository
 git pull                   # Fetch and merge changes from remote
 git branch -m old-name new-name # Rename a branch
+git commit --allow-empty -m "Empty commit to trigger CI/CD pipeline" # Push an empty commit
 ```
 
 ### Understanding git pull vs git merge
