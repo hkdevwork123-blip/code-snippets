@@ -8,6 +8,10 @@ export default defineConfig({
   themeConfig: {
     logo: "/com-laptop-code-svgrepo-com.svg",
     // https://vitepress.dev/reference/default-theme-config
+    search: {
+      provider: "local",
+    },
+
     nav: [
       { text: "Home", link: "/" },
       { text: "About", link: "/About" },
